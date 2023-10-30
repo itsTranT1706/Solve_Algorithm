@@ -9,17 +9,41 @@ For example, if our input was [1, 2, 3, 4, 5], the expected output would be [120
 */
 
 // SOLUTION1:
-function mySolve(array) {
-  let result = [];
-  for (let i=0;i<array.length;++i) {
-    let item=1;
-    for (let j=0;j<array.length;++j) {
-      if (j!==i) {
-        item=item*array[j];
-      } 
+// function mySolve(array) {
+//   let result = [];
+//   for (let i=0;i<array.length;++i) {
+//     let item=1;
+//     for (let j=0;j<array.length;++j) {
+//       if (j!==i) {
+//         item=item*array[j];
+//       } 
+//   }
+//       result.push(item);
+//   }
+//   return result;
+// }
+// console.log(mySolve([1, 2, 3, 4, 5]))
+
+
+//SOLUTION2 ; 
+function mySolve(arr) {
+  let length = arr.length;
+  let left = new Array(length);
+  let right = new Array(length);
+  let pro = new Array(length);
+  left[0] = 1;
+  right[length - 1] = 1;
+  for (let i = 1; i < length; ++i) {
+    left[i] = arr[i - 1] * left[i - 1];
   }
-      result.push(item);
+  // console.log(left);
+  for (let i = length - 2; i >= 0; --i) {
+    right[i] = arr[i + 1] * right[i + 1];
   }
-  return result;
+  // console.log(right);
+  for (let i = 0; i < length; ++i) {
+    pro[i] = left[i] * right[i];
+  }
+  return pro;
 }
-console.log(mySolve([3, 2, 1]))
+console.log(mySolve([10, 3, 5, 6, 2]))
