@@ -9,26 +9,51 @@ In other words, find the lowest positive integer that does not exist in the arra
 
 For example, the input [3, 4, -1, 1] should give 2. The input [1, 2, 0] should give 3.
  */
+
+//SOLUTION 1;
 // function posArr(arr) {
 //     return arr.filter((num)=> {
 //         return num>0;
 //     })
+// // }
+// function sortArr(arr) {
+//      arr.sort((a,b)=> {
+//         return a-b;
+//      })
+//      return arr;
 // }
-function sortArr(arr) {
-     arr.sort((a,b)=> {
-        return a-b;
-     })
-     return arr;
-}
-function mySolve(arr) {
-    // let temp = posArr(arr);
-    let newArr = sortArr(arr);
-    let result=1 ;
-    while (newArr.indexOf(result)>=0) {
-        result++;
+// function mySolve(arr) {
+//     // let temp = posArr(arr);
+//     let newArr = sortArr(arr);
+//     let result=1 ;
+//     while (newArr.indexOf(result)>=0) {
+//         result++;
 
+//     }
+//     return result;
+// }
+// let arr = [1, 1, 0, -1, -2 ];
+// console.log(mySolve(arr));
+
+
+//SOLUTION 2:
+function mySolve(arr) {
+    let n = arr.length;
+    let check = new Array(n+1)
+    for (let i=0;i<=n;i++) {
+            check[i] = false;
     }
-    return result;
+    for(let  i=0;i<n;i++) {
+        if (arr[i]>0&&arr[i]<n) {
+            check[i]=true;
+        }
+    } 
+    for(let i=1;i<=n;i++) {
+        if(!check[i]) {
+            return i;
+        }
+    }
+    return n+1;
 }
-let arr = [1, 2, 0];
+let arr = [0, 10, 2, -10, -20];
 console.log(mySolve(arr));
