@@ -10,3 +10,22 @@ For example, the message '111' would give 3, since it could be decoded as 'aaa',
 
 You can assume that the messages are decodable. For example, '001' is not allowed.
  */
+
+//SOLUTION 1;
+function decoded(message) {
+        let length=message.length;
+        if (length===1) {
+            return 1;
+        }
+        if (int(message)>26) {
+            return 0;
+        }
+        
+        
+        // return decoded(message.slice(length-1))+decoded(message.slice(length-2));
+}
+console.log(decoded("123456"));
+
+
+
+
