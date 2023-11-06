@@ -13,18 +13,26 @@ You can assume that the messages are decodable. For example, '001' is not allowe
 
 //SOLUTION 1;
 function decoded(message) {
-        let length=message.length;
-        if (length===1) {
-            return 1;
-        }
-        if (int(message)>26) {
+   let s=message;
+   let n = s.length;
+        let count = new Array(n + 1);
+        count[0] = count[1] = 1;
+        if(s.charAt(0) =='0')
             return 0;
+        for (let i = 2; i <= n; i++)
+        {
+            count[i] = 0;
+
+            if (s.charAt(i - 1) > '0')
+                count[i] = count[i - 1];
+
+            if (s.charAt(i - 2) == '1' || (s.charAt(i - 2) == '2' && s.charAt(i - 1) < '7'))
+                count[i] += count[i - 2];
         }
-        
-        
-        // return decoded(message.slice(length-1))+decoded(message.slice(length-2));
+        return count[n];
+   
 }
-console.log(decoded("123456"));
+console.log(decoded("54321"));
 
 
 
